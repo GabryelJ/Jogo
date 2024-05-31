@@ -20,8 +20,21 @@ if __name__ == '__main__':
 
     # cria um grupo de sprites para jogador(es) (player).
     playerGroup = pygame.sprite.Group()
-    player = Player()  # instancia de player
+    # Grupo de sprites
+    all_sprites = pygame.sprite.Group()
+    bullet_group = pygame.sprite.Group()
+
+    player = Player(bullet_group)  # instancia de player
     playerGroup.add(player)
+    all_sprites.add(player)
+
+    # Criar instância do jogador
+   # player = Player(bullet_group)  # instancia de player
+    #player = Player(bullet_group)
+   # all_sprites.add(player)
+
+    #player = Player(bullet_group)  # instancia de player
+    #playerGroup.add(player)
 
     # cria um grupo de sprites para o chão (ground)
     groundGroup = pygame.sprite.Group()
@@ -32,10 +45,15 @@ if __name__ == '__main__':
     def draw():  # renderiza os objetos dos grupos na tela
         playerGroup.draw(SCREEN)
         groundGroup.draw(SCREEN)
+        bullet_group.draw(SCREEN)
+
+
 
 
     def update():  # atualiza o estado dos sprites
         playerGroup.update()
+        all_sprites.update()
+        bullet_group.update()
 
 
     running = True

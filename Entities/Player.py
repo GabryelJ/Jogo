@@ -1,5 +1,5 @@
 import pygame
-from Entities.sprites.Bullet import Bullet
+from Entities.Bullet import Bullet
 class Player(pygame.sprite.Sprite):
 
     def __init__(self, bullet_group):
@@ -14,28 +14,28 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.current_image = 0
         # lista contem sequencia de imagens para animação do boneco correndo.
-        self.sprite_runningDireita = [pygame.image.load('Entities/sprites/sprite_0.png').convert_alpha(),
+        self.sprite_running_right = [pygame.image.load('Entities/sprites/sprite_0.png').convert_alpha(),
                                pygame.image.load('Entities/sprites/sprite_1.png').convert_alpha(),
                                pygame.image.load('Entities/sprites/sprite_2.png').convert_alpha(),
                                pygame.image.load('Entities/sprites/sprite_3.png').convert_alpha(),
                                pygame.image.load('Entities/sprites/sprite_4.png').convert_alpha()]
-        #Fazer a mesma cois do runningDireita só que para esquerda
-        self.sprite_runningEsquerda = [pygame.transform.flip(img, True, False) for img in self.sprite_runningDireita]
+        #Fazer a mesma cois do running_right só que para _left
+        self.sprite_running_left = [pygame.transform.flip(img, True, False) for img in self.sprite_running_right]
         self.is_shooting = False
         self.shooting_timer = 0
         self.shooting_duration = 10
         self.bullet_group = bullet_group
         self.contadortiros=5
-        self.andando="direita"
+        self.walk_direction = "right"
 
     def player_movement(self):
         key = pygame.key.get_pressed()
-        if key[pygame.K_d]:  # se a tecla d for pressionada move para direita
-            self.andando = "direita"
+        if key[pygame.K_d]:  # se a tecla d for pressionada move para _right
+            self.walk_direction = "right"
             self.rect[0] += self.speed
             self.walk()
-        if key[pygame.K_a]:  # se a tecla a for pressionada move para esquerda
-            self.andando="esquerda"
+        if key[pygame.K_a]:  # se a tecla a for pressionada move para _left
+            self.walk_direction = "left"
             self.rect[0] -= self.speed
             self.walk()
         if key[pygame.K_SPACE] and self.on_ground:  # Tecla de espaço para saltar
@@ -49,19 +49,19 @@ class Player(pygame.sprite.Sprite):
 
 
         if not any (key):
-            if(self.andando=="direita"):
-             self.image = self.sprite_runningDireita[0]
+            if(self.walk_direction == "right"):
+             self.image = self.sprite_running_right[0]
             else:
-             self.image = self.sprite_runningEsquerda[0]
+             self.image = self.sprite_running_left[0]
 
         self.image = pygame.transform.scale(self.image, [100, 98])
 
     def walk(self):
         self.current_image = (self.current_image + 0.2) % 4
-        if(self.andando=="direita"):
-          self.image = self.sprite_runningDireita[int(self.current_image)]
+        if(self.walk_direction == "right"):
+          self.image = self.sprite_running_right[int(self.current_image)]
         else:
-            self.image = self.sprite_runningEsquerda[int(self.current_image)]
+            self.image = self.sprite_running_left[int(self.current_image)]
 
     def update(self, *args):
 
@@ -88,16 +88,16 @@ class Player(pygame.sprite.Sprite):
     def shoot(self):
        #if not self.is_shooting:
             #self.is_shooting = True
-            if(self.andando=="direita"):
-               self.image = self.sprite_runningDireita[4]
+            if(self.walk_direction == "right"):
+               self.image = self.sprite_running_right[4]
             else:
-               self.image = self.sprite_runningEsquerda[4]
+               self.image = self.sprite_running_left[4]
             self.shooting_timer = 0
             self.contadortiros += 1
 
             if(self.contadortiros % 10==0):
-              if(self.andando=="direita"):
-                bullet = Bullet(self.rect.centerx, self.rect.centery, 10,"direita")
+              if(self.walk_direction == "right"):
+                bullet = Bullet(self.rect.centerx, self.rect.centery, 10,"right")
               else:
-                bullet = Bullet(self.rect.centerx, self.rect.centery, 10, "esquerda")
+                bullet = Bullet(self.rect.centerx, self.rect.centery, 10, "left")
               self.bullet_group.add(bullet)

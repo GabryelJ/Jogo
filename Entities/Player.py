@@ -27,6 +27,7 @@ class Player(pygame.sprite.Sprite):
         self.bullet_group = bullet_group
         self.contadortiros=5
         self.andando="direita"
+        self.olhandocima = False
 
     def player_movement(self):
         key = pygame.key.get_pressed()
@@ -40,6 +41,10 @@ class Player(pygame.sprite.Sprite):
             self.walk()
         if key[pygame.K_SPACE] and self.on_ground:  # Tecla de espaço para saltar
             self.jump()
+        if key[pygame.K_w] and self.on_ground:
+            self.olhandocima = True
+        else:
+            self.olhandocima = False
         if key[pygame.K_s]:
             self.shoot()
         else:
@@ -98,6 +103,8 @@ class Player(pygame.sprite.Sprite):
             if(self.contadortiros % 10==0):
               if(self.andando=="direita"):
                 bullet = Bullet(self.rect.centerx, self.rect.centery, 10,"direita")
-              else:
+              elif(self.andando=="esquerda"):
                 bullet = Bullet(self.rect.centerx, self.rect.centery, 10, "esquerda")
+              if(self.olhandocima==True):
+                bullet = Bullet(self.rect.centerx, self.rect.centery, 10, "cima")
               self.bullet_group.add(bullet)

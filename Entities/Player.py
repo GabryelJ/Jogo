@@ -4,9 +4,9 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, bullet_group):
         self.speed = 4  # velocidade do boneco
-        self.gravity = 0.3  # gravidade do boneco
+        self.gravity = 0.3 # gravidade do boneco
         self.vertical_velocity = 0 # Velocidade vertical inicial
-        self.jump_speed = -20  # Velocidade inicial do salto (negativa para subir)
+        self.jump_speed = -40 # Velocidade inicial do salto (negativa para subir)
         self.on_ground = True  # Para verificar se o jogador está no chão
         pygame.sprite.Sprite.__init__(self)  # inicializa Sprite
         # carrega imagem e convert_alpha() mantem os pixels transparentes

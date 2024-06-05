@@ -1,4 +1,5 @@
 import pygame
+import time
 from Entities.Bullet import Bullet
 
 
@@ -8,8 +9,10 @@ class Player(pygame.sprite.Sprite):
         self.speed = 4  # velocidade do boneco
         self.gravity = 0.3  # gravidade do boneco
         self.vertical_velocity = 0  # Velocidade vertical inicial
-        self.jump_speed = -20  # Velocidade inicial do salto (negativa para subir)
+        self.jump_speed = -40  # Velocidade inicial do salto (negativa para subir)
         self.on_ground = True  # Para verificar se o jogador está no chão
+        self.last_jump_time = 0  # Guarda o tempo do último pulo
+        self.jump_delay = 1  # Delay de meio segundo entre pulos
         self.image = pygame.image.load('Entities/sprites/sprite_0.png').convert_alpha()  # carrega imagem e convert_alpha() mantem os pixels transparentes
         self.rect = self.image.get_rect()
         self.current_image = 0
@@ -78,9 +81,11 @@ class Player(pygame.sprite.Sprite):
             self.on_ground = True
 
     def jump(self):  # TODO: refazer jump, bug.
-        if self.on_ground:  # Permite pular somente se estiver no chão
+        current_time = time.time()
+        if self.on_ground and (current_time - self.last_jump_time >= self.jump_delay):
             self.vertical_velocity = self.jump_speed
-            self.on_ground = False  # Marca que o jogador não está no chão
+            self.on_ground = False
+            self.last_jump_time = current_time
 
     def shoot(self):
         if (self.walk_direction == "right"):

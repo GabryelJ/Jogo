@@ -81,7 +81,6 @@ class Player(pygame.sprite.Sprite):
                 self.image = self.sprite_running_left[0]
 
         self.image = pygame.transform.scale(self.image, [100, 98])
-        self.rect = self.image.get_rect(topleft=self.rect.topleft)
 
     def walk(self):
         self.current_image = (self.current_image + 0.05) % 4
@@ -93,6 +92,8 @@ class Player(pygame.sprite.Sprite):
     def update(self, *args):
         self.player_movement()
         self.apply_gravity()
+        self.image = pygame.transform.scale(self.image, [100, 98])
+        self.rect = self.image.get_rect(topleft=self.rect.topleft)
 
 
 
@@ -139,7 +140,7 @@ class Player(pygame.sprite.Sprite):
             self.kill()
 
     def draw(self, screen):
-        # Desenhe a imagem da bala
+
         screen.blit(self.image, self.rect.topleft)
         # Desenhe o rect em vermelho para visualização
         pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)

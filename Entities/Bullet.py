@@ -20,16 +20,15 @@ class Bullet(pygame.sprite.Sprite):
     def update(self):
         if self.speed == 500:
             self.rect.y -= 10
-            self.rect = self.image.get_rect(topleft=self.rect.topleft)
         else:
             self.rect.x += self.speed
-            self.rect = self.image.get_rect(topleft=self.rect.topleft)
         if self.rect.x > 800 or self.rect.x < -100 or self.rect.y < 0 or self.rect.y > 600:
-
             self.kill()
+        self.image = pygame.transform.scale(self.image, [100, 98])
+        self.rect = self.image.get_rect(topleft=self.rect.topleft)
 
     def draw(self, screen):
-        # Desenhe a imagem do jogador
+
         screen.blit(self.image, self.rect.topleft)
         # Desenhe o rect em vermelho para visualização
         pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)

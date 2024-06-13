@@ -1,7 +1,9 @@
 import pygame
 from Entities.Player import Player
+from Entities.Bullet import Bullet
 from World.Ground import Ground
 from World.Platform import Platform
+from Entities.Weapon import Pistol, Shotgun
 from Entities.AmmoBox import AmmoBox
 from Program.constants import HEIGHT, WIDTH
 
@@ -12,7 +14,6 @@ def draw():
         player.draw(SCREEN)
     for bullet in bullet_group:
         bullet.draw(SCREEN)
-    GROUND.draw(SCREEN)
     platform_group.draw(SCREEN)
     bullet_group.draw(SCREEN)
     ammo_group.draw(SCREEN)

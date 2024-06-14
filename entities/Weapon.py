@@ -1,4 +1,4 @@
-from Entities.Bullet import Bullet
+from entities.Bullet import Bullet
 
 class Weapon:
     def __init__(self, bullet_group):

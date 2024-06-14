@@ -1,6 +1,6 @@
 import pygame
 import time
-from Entities.Bullet import Bullet
+from entities.Bullet import Bullet
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, bullet_group, player_id):
@@ -12,15 +12,15 @@ class Player(pygame.sprite.Sprite):
         self.on_ground = True
         self.last_jump_time = 0
         self.jump_delay = 0.2
-        self.image = pygame.image.load('Entities/sprites/sprite_0.png').convert_alpha()
+        self.image = pygame.image.load('entities/sprites/sprite_0.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.y = 525  # Ensure player starts on the ground
         self.current_image = 0
-        self.sprite_running_right = [pygame.image.load('Entities/sprites/sprite_0.png').convert_alpha(),
-                                     pygame.image.load('Entities/sprites/sprite_1.png').convert_alpha(),
-                                     pygame.image.load('Entities/sprites/sprite_2.png').convert_alpha(),
-                                     pygame.image.load('Entities/sprites/sprite_3.png').convert_alpha(),
-                                     pygame.image.load('Entities/sprites/sprite_4.png').convert_alpha()]
+        self.sprite_running_right = [pygame.image.load('entities/sprites/sprite_0.png').convert_alpha(),
+                                     pygame.image.load('entities/sprites/sprite_1.png').convert_alpha(),
+                                     pygame.image.load('entities/sprites/sprite_2.png').convert_alpha(),
+                                     pygame.image.load('entities/sprites/sprite_3.png').convert_alpha(),
+                                     pygame.image.load('entities/sprites/sprite_4.png').convert_alpha()]
         self.sprite_running_left = [pygame.transform.flip(img, True, False) for img in self.sprite_running_right]
         self.is_shooting = False
         self.shooting_timer = 0

@@ -1,5 +1,5 @@
 import pygame
-from Program.constants import WIDTH, GROUND_HEIGHT, HEIGHT
+from constants import WIDTH, GROUND_HEIGHT, HEIGHT
 
 
 class Ground(pygame.sprite.Sprite):

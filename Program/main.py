@@ -24,9 +24,13 @@ if __name__ == '__main__':
     all_sprites = pygame.sprite.Group()
     bullet_group = pygame.sprite.Group()
 
-    player = Player(bullet_group)  # instancia de player
+    player = Player(bullet_group,1)  # instancia de player
+    player2 = Player(bullet_group,2)
+    playerGroup.add(player2)
     playerGroup.add(player)
     all_sprites.add(player)
+    all_sprites.add(player2)
+
 
     # Criar instância do jogador
    # player = Player(bullet_group)  # instancia de player
@@ -46,6 +50,8 @@ if __name__ == '__main__':
         playerGroup.draw(SCREEN)
         groundGroup.draw(SCREEN)
         bullet_group.draw(SCREEN)
+        all_sprites.draw(SCREEN)
+
 
 
 

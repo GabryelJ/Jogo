@@ -2,7 +2,7 @@ import pygame
 from Entities.sprites.Bullet import Bullet
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, bullet_group):
+    def __init__(self, bullet_group,nplayer):
         self.speed = 4  # velocidade do boneco
         self.gravity = 0.3  # gravidade do boneco
         self.vertical_velocity = 0 # Velocidade vertical inicial
@@ -28,14 +28,20 @@ class Player(pygame.sprite.Sprite):
         self.contadortiros=5
         self.andando="direita"
         self.olhandocima = False
+        if(nplayer==1):
+            self.allowedkeys=[pygame.K_d, pygame.K_a, pygame.K_w,pygame.K_s]
+        else:
+            self.allowedkeys = [pygame.K_RIGHT,pygame.K_LEFT, pygame.K_UP, pygame.K_KP_ENTER]
+
+
 
     def player_movement(self):
         key = pygame.key.get_pressed()
-        if key[pygame.K_d]:  # se a tecla d for pressionada move para direita
+        if key[self.allowedkeys[0]]:  # se a tecla d for pressionada move para direita
             self.andando = "direita"
             self.rect[0] += self.speed
             self.walk()
-        if key[pygame.K_a]:  # se a tecla a for pressionada move para esquerda
+        if key[self.allowedkeys[1]]:  # se a tecla a for pressionada move para esquerda
             self.andando="esquerda"
             self.rect[0] -= self.speed
             self.walk()

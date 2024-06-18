@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="6b138d4a-de14-402c-a601-ef52710e7834" name="Changes" comment="Atualização das imagens e conferindo se todas as classes estão ok">
+=======
+    <list default="true" id="6b138d4a-de14-402c-a601-ef52710e7834" name="Changes" comment="">
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,9 +19,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< Updated upstream
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+=======
+>>>>>>> Stashed changes
   <component name="ProjectId" id="2hFsTwXDlRreNnTerDasbNMcSSw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -125,10 +132,13 @@
         </entry>
       </map>
     </option>
+<<<<<<< Updated upstream
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Versão de 18 horas" />
     <MESSAGE value="Atualização das imagens e conferindo se todas as classes estão ok" />
     <option name="LAST_COMMIT_MESSAGE" value="Atualização das imagens e conferindo se todas as classes estão ok" />
+=======
+>>>>>>> Stashed changes
   </component>
 </project>

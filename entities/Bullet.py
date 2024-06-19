@@ -3,7 +3,7 @@ import pygame
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, speed, walk_direction, damage=10):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('Entities/sprites/sprite_bullet.png').convert_alpha()
+        self.image = pygame.image.load('entities/sprites/sprite_bullet.png').convert_alpha()
         self.rect = self.image.get_rect()
         self.image = pygame.transform.scale(self.image, [100, 100])
         if walk_direction == "right":

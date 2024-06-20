@@ -4,6 +4,7 @@ from world.Ground import Ground
 from world.Platform import Platform
 from entities.AmmoBox import AmmoBox
 from constants import HEIGHT, WIDTH
+from entities.Plane import Plane
 
 def draw():
     player_group.draw(SCREEN)
@@ -17,11 +18,13 @@ def draw():
     bullet_group.draw(SCREEN)
     ammo_group.draw(SCREEN)
     draw_hud()
+    plane_group.draw(SCREEN)
 
 def update():
     player_group.update()
     bullet_group.update()
     ammo_group.update()
+    plane_group.update()
 
 def draw_hud():
     font = pygame.font.Font(None, 36)
@@ -50,8 +53,13 @@ platform_group.add(Platform(400, 300, 200, 20))
 platform_group.add(GROUND)
 
 ammo_group = pygame.sprite.Group()
-ammo_box = AmmoBox(300, 500,player_group)#encontrar uma forma de verificar se existe alguma amobox,se não existir nenhuma viva,cria
-ammo_group.add(ammo_box)                 #eventos talvez verificar a todo clock?
+#ammo_box = AmmoBox(300, 450)#encontrar uma forma de verificar se existe alguma amobox,se não existir nenhuma viva,cria
+#ammo_group.add(ammo_box)                 #eventos talvez verificar a todo clock?
+
+plane_group = pygame.sprite.Group()
+plane = Plane(ammo_group)
+plane_group.add(plane)
+
 
 running = True
 while running:
@@ -78,6 +86,14 @@ while running:
                 player.vertical_velocity = 0
                 player.on_ground = True
 
+        for ammo_box in ammo_group:
+            if pygame.sprite.spritecollide(ammo_box, platform_group, False):
+                ammo_box.on_ground = True
+                ammo_box.gravity = 0
+            if pygame.sprite.spritecollide(ammo_box, player_group, False):
+                player.ammunition = 10
+                ammo_box.kill()
+        
 
 #player.vertical_velocity >= 0 and
     for bullet in bullet_group:

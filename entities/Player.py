@@ -23,8 +23,6 @@ class Player(pygame.sprite.Sprite):
                                      pygame.image.load('entities/sprites/sprite_4.png').convert_alpha()]
         self.sprite_running_left = [pygame.transform.flip(img, True, False) for img in self.sprite_running_right]
         self.is_shooting = False
-        self.shooting_timer = 0
-        self.shooting_duration = 10
         self.bullet_group = bullet_group
         self.bullet_counter = 5
         self.walk_direction = "right"
@@ -120,7 +118,6 @@ class Player(pygame.sprite.Sprite):
             self.image = self.sprite_running_right[4]
         else:
             self.image = self.sprite_running_left[4]
-        self.shooting_timer = 0
         self.bullet_counter += 1
         if self.bullet_counter % 10 == 0:
             if self.aimming_up:
@@ -133,7 +130,6 @@ class Player(pygame.sprite.Sprite):
                 bullet = Bullet(self.rect.centerx, self.rect.centery, 10, "left")
                 self.ammunition -= 1
             self.bullet_group.add(bullet)
-
     def take_damage(self, amount):
         self.health -= amount
         if self.health <= 0:

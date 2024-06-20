@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_delay = 0.2
         self.image = pygame.image.load('entities/sprites/sprite_0.png').convert_alpha()
         self.rect = self.image.get_rect()
-        self.rect.y = 525  # Ensure player starts on the ground
+        self.rect.y = 450  # Ensure player starts on the ground
         self.current_image = 0
         self.sprite_running_right = [pygame.image.load('entities/sprites/sprite_0.png').convert_alpha(),
                                      pygame.image.load('entities/sprites/sprite_1.png').convert_alpha(),
@@ -31,6 +31,16 @@ class Player(pygame.sprite.Sprite):
         self.health = 100
         self.ammunition=10
 
+        # Defina as dimensões da hitbox
+        hitbox_width = 60
+        hitbox_height = 80
+
+        # Calcule a posição X e Y para centralizar a hitbox
+        hitbox_x = self.rect.x + (self.rect.width - hitbox_width) // 2
+        hitbox_y = self.rect.y + (self.rect.height - hitbox_height) // 2
+
+        # Defina a hitbox personalizada centralizada
+        self.hitbox = pygame.Rect(hitbox_x, hitbox_y, hitbox_width, hitbox_height)
 
         # Controles específicos para cada jogador
         if player_id == 1:
@@ -93,6 +103,19 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, [100, 98])
         self.rect = self.image.get_rect(topleft=self.rect.topleft)
 
+        # atualiza pos da hitbox
+        #self.hitbox.topleft = self.rect.topleft
+
+        # Defina as dimensões da hitbox
+        hitbox_width = 50
+        hitbox_height = 80
+
+        # Calcule a posição X e Y para centralizar a hitbox
+        hitbox_x = self.rect.x + (self.rect.width - hitbox_width) // 2
+        hitbox_y = self.rect.y + (self.rect.height - hitbox_height) + 7 // 2
+
+        self.hitbox = pygame.Rect(hitbox_x, hitbox_y, hitbox_width, hitbox_height)
+
 
 
     def apply_gravity(self):
@@ -101,10 +124,10 @@ class Player(pygame.sprite.Sprite):
         else:
             self.vertical_velocity = 0
         self.rect.y += self.vertical_velocity
-        if self.rect.bottom >= 525:  # Check collision with ground
-            self.rect.bottom = 525
-            self.vertical_velocity = 0
-            self.on_ground = True
+        #if self.rect.bottom >= 525:  # Check collision with ground
+            #self.rect.bottom = 525
+            #self.vertical_velocity = 0
+            #self.on_ground = True
 
     def jump(self):
         current_time = time.time()
@@ -140,3 +163,6 @@ class Player(pygame.sprite.Sprite):
         screen.blit(self.image, self.rect.topleft)
         # Desenhe o rect em vermelho para visualização
         pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)
+
+        # Desenhe a hitbox em azul para visualização
+        pygame.draw.rect(screen, (0, 0, 255), self.hitbox, 2)

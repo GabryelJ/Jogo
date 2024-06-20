@@ -20,3 +20,4 @@ class AmmoBox(pygame.sprite.Sprite):
 
     def update(self):
         self.physic()
+

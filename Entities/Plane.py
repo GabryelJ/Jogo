@@ -21,6 +21,7 @@ class Plane(pygame.sprite.Sprite):
             self.drop_counter += 1
             self.ammo_group.add(ammo_drop)
         self.drop_counter += 1
+
     def patrol(self):
         self.rect.x += self.speed
         if self.rect.centerx >= 800 or self.rect.centerx <= 0:

@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_delay = 0.2
         self.image = pygame.image.load('entities/sprites/sprite_0.png').convert_alpha()
         self.rect = self.image.get_rect()
-        self.rect.y = 450  # Ensure player starts on the ground
+        self.rect.y = 450  # Faz jogadores ser instanciados na altura do chão
         self.current_image = 0
         self.sprite_running_right = [pygame.image.load('entities/sprites/sprite_0.png').convert_alpha(),
                                      pygame.image.load('entities/sprites/sprite_1.png').convert_alpha(),
@@ -117,17 +117,13 @@ class Player(pygame.sprite.Sprite):
         self.hitbox = pygame.Rect(hitbox_x, hitbox_y, hitbox_width, hitbox_height)
 
 
-
     def apply_gravity(self):
         if not self.on_ground:
             self.vertical_velocity += self.gravity
         else:
             self.vertical_velocity = 0
         self.rect.y += self.vertical_velocity
-        #if self.rect.bottom >= 525:  # Check collision with ground
-            #self.rect.bottom = 525
-            #self.vertical_velocity = 0
-            #self.on_ground = True
+
 
     def jump(self):
         current_time = time.time()
@@ -135,6 +131,7 @@ class Player(pygame.sprite.Sprite):
             self.vertical_velocity = self.jump_speed
             self.on_ground = False
             self.last_jump_time = current_time
+
 
     def shoot(self):
         if self.walk_direction == "right":
@@ -153,10 +150,13 @@ class Player(pygame.sprite.Sprite):
                 bullet = Bullet(self.rect.centerx, self.rect.centery, 10, "left")
                 self.ammunition -= 1
             self.bullet_group.add(bullet)
+
+
     def take_damage(self, amount):
         self.health -= amount
         if self.health <= 0:
             self.kill()
+
 
     def draw(self, screen):
 

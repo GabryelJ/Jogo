@@ -8,12 +8,12 @@ from entities.Plane import Plane
 
 def draw():
     player_group.draw(SCREEN)
-    #ground_group.draw(SCREEN)
     for player in player_group:
         player.draw(SCREEN)
+
     for bullet in bullet_group:
         bullet.draw(SCREEN)
-    #GROUND.draw(SCREEN)
+
     platform_group.draw(SCREEN)
     bullet_group.draw(SCREEN)
     ammo_group.draw(SCREEN)
@@ -38,26 +38,20 @@ def draw_hud():
 pygame.init()
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
+
 bullet_group = pygame.sprite.Group()
 player_group = pygame.sprite.Group()
 player1 = Player(bullet_group, 1)
 player2 = Player(bullet_group, 2)
 player_group.add(player1)
 player_group.add(player2)
-#ground_group = pygame.sprite.Group()
-#GROUND = Ground()
-#ground_group.add(GROUND)
 
 platform_group = pygame.sprite.Group()
 platform_group.add(Platform(200, 400, 200, 20,1))
-platform_group.add(Platform(400, 300, 200, 20,1))
+platform_group.add(Platform(400, 300, 200, 20,2))
 platform_group.add(Platform(0 , 580, 800, 20,0))
-#platform_group.add(GROUND)
 
 ammo_group = pygame.sprite.Group()
-#ammo_box = AmmoBox(300, 450)#encontrar uma forma de verificar se existe alguma amobox,se não existir nenhuma viva,cria
-#ammo_group.add(ammo_box)                 #eventos talvez verificar a todo clock?
-
 plane_group = pygame.sprite.Group()
 plane = Plane(ammo_group)
 plane_group.add(plane)
@@ -70,15 +64,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # Colisões com o chão
-   # for player in player_group:
-    #    if pygame.sprite.spritecollide(player, platform_group, False):#tava ground_group
-     #       player.rect.bottom = 525
-      #      player.vertical_velocity = 0
-       #     player.on_ground = True
-        #else:
-         #   player.on_ground = False
-
     for player in player_group:
         collisions = pygame.sprite.spritecollide(player, platform_group, False)
         player.on_ground = False
@@ -88,13 +73,6 @@ while running:
                 player.vertical_velocity = 0
                 player.on_ground = True
 
-        #for ammo_box in ammo_group:
-            #if pygame.sprite.spritecollide(ammo_box, platform_group, False):
-               # ammo_box.on_ground = True
-               # ammo_box.gravity = 0
-           # if pygame.sprite.spritecollide(ammo_box, player_group, False):
-               # player.ammunition = 10
-                #ammo_box.kill()
 
         for ammo_box in ammo_group:
             if pygame.sprite.spritecollide(ammo_box, platform_group, False):
@@ -108,16 +86,14 @@ while running:
                     player.ammunition = 10
                     ammo_box.kill()
 
-    #player.vertical_velocity >= 0 and
+
     for bullet in bullet_group:
         if pygame.sprite.spritecollide(bullet, player_group, False):
             for player in player_group:
                 if bullet.hitbox.colliderect(player.hitbox):
                     player.take_damage(bullet.damage)
                     bullet.kill()
-                #if pygame.sprite.collide_rect(bullet, player):
-                   # player.take_damage(bullet.damage)
-                    #bullet.kill()
+
 
     update()
     SCREEN.fill("white")

@@ -1,7 +1,7 @@
 import pygame
 
 class AmmoBox(pygame.sprite.Sprite):
-    def __init__(self, x, y):#gerar a aleatoriedade de onde ela vai surgir na main
+    def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.gravity = 1
         self.on_ground = False
@@ -12,7 +12,6 @@ class AmmoBox(pygame.sprite.Sprite):
         self.rect.y = y
 
 
-
     def physic(self):
         if not self.on_ground:
             self.rect.y += self.gravity
@@ -20,4 +19,3 @@ class AmmoBox(pygame.sprite.Sprite):
 
     def update(self):
         self.physic()
-

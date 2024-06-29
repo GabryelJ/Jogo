@@ -3,7 +3,6 @@ from constants import WIDTH, GROUND_HEIGHT, HEIGHT
 
 
 class Ground(pygame.sprite.Sprite):
-
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)  # inicializa Sprite
         self.image = pygame.image.load('World/sprites/sprite_ground_0.png').convert_alpha()

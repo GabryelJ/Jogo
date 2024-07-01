@@ -1,8 +1,6 @@
 import pygame
 from entities.Player import Player
-from world.Ground import Ground
 from world.Platform import Platform
-from entities.AmmoBox import AmmoBox
 from constants import HEIGHT, WIDTH
 from entities.Plane import Plane
 

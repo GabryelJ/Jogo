@@ -7,25 +7,40 @@ from world.Platform import Platform
 
 class Game:
     def __init__(self):  # inicializa Game
+        self.player1 = None
         pygame.init()
         self.screen = pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))
         self.clock = pygame.time.Clock()
         self.running = True
-
-    def new_game(self):  # instancia e inicializa grupos e seus componentes
+        self.font = pygame.font.Font(None, 100)
+        self.play_text = self.font.render('Play (1)', True, (0, 0, 0))
+        self.play_rect = self.play_text.get_rect(center=(constants.WIDTH / 2, constants.HEIGHT / 2 - 50))
+        self.quit_text = self.font.render('Quit (2)', True, (0, 0, 0))
+        self.quit_rect = self.quit_text.get_rect(center=(constants.WIDTH / 2, constants.HEIGHT / 2 + 50))
         self.bullet_group = pygame.sprite.Group()
         self.player_group = pygame.sprite.Group()
-        self.player1 = Player(self.bullet_group, 1)
-        self.player2 = Player(self.bullet_group, 2)
-        self.player_group.add(self.player1)
-        self.player_group.add(self.player2)
         self.platform_group = pygame.sprite.Group()
-        self.platform_group.add(Platform(200, 400, 200, 20, 1))
-        self.platform_group.add(Platform(400, 300, 200, 20, 2))
-        self.platform_group.add(Platform(0, 580, 800, 20, 0))
         self.ammo_group = pygame.sprite.Group()
         self.plane_group = pygame.sprite.Group()
+        self.player1 = None
+        self.player2 = None
+        self.plane = None
+        self.platform1 = None
+        self.platform2 = None
+        self.ground = None
+
+    def new_game(self):  # instancia e inicializa grupos e seus componentes
+        self.player1 = Player(self.bullet_group, 1)
+        self.player2 = Player(self.bullet_group, 2)
         self.plane = Plane(self.ammo_group)
+        self.platform1 = Platform(200, 400, 200, 20, 1)
+        self.platform2 = Platform(400, 300, 200, 20, 2)
+        self.ground = Platform(0, 580, 800, 20, 0)
+        self.player_group.add(self.player1)
+        self.player_group.add(self.player2)
+        self.platform_group.add(self.platform1)
+        self.platform_group.add(self.platform2)
+        self.platform_group.add(self.ground)
         self.plane_group.add(self.plane)
         self.run()
 
@@ -61,13 +76,13 @@ class Game:
         self.screen.blit(player2_text, (20, 60))
 
     def run(self):  # game loop
-        self.playing = True
-        while self.playing:
+        playing = True
+        while playing:
             self.clock.tick(60)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.playing = False
+                    playing = False
                     self.running = False
 
             self.players_collision()
@@ -75,8 +90,8 @@ class Game:
             self.check_bullet_impact()
 
             if self.player1.health == 0 or self.player2.health == 0:  # game over
-                self.collect()
-                self.playing = False
+                self.collect_sprites_from_groups()
+                playing = False
                 self.menu()
 
             self.update()
@@ -114,7 +129,7 @@ class Game:
                     player.ammunition = 10
                     ammo_box.kill()
 
-    def collect(self):  # tratar vazamento de memória após reinicio
+    def collect_sprites_from_groups(self):  # tratar vazamento de memória após reinicio
         self.player_group.empty()
         self.bullet_group.empty()
         self.ammo_group.empty()
@@ -122,17 +137,11 @@ class Game:
         self.platform_group.empty()
 
     def menu(self):
-        font = pygame.font.Font(None, 100)
-        play_text = font.render('Play (1)', True, (0, 0, 0))
-        play_rect = play_text.get_rect(center=(constants.WIDTH / 2, constants.HEIGHT / 2 - 50))
-        quit_text = font.render('Quit (2)', True, (0, 0, 0))
-        quit_rect = quit_text.get_rect(center=(constants.WIDTH / 2, constants.HEIGHT / 2 + 50))
-
         menu_running = True
         while menu_running:
             self.screen.fill("white")
-            self.screen.blit(play_text, play_rect)
-            self.screen.blit(quit_text, quit_rect)
+            self.screen.blit(self.play_text, self.play_rect)
+            self.screen.blit(self.quit_text, self.quit_rect)
             pygame.display.flip()
 
             for event in pygame.event.get():
@@ -141,10 +150,10 @@ class Game:
                     menu_running = False
 
                 if event.type == pygame.MOUSEBUTTONDOWN:  # interalçao com menu via mouse
-                    if play_rect.collidepoint(event.pos):
+                    if self.play_rect.collidepoint(event.pos):
                         menu_running = False
                         self.new_game()
-                    if quit_rect.collidepoint(event.pos):
+                    if self.quit_rect.collidepoint(event.pos):
                         self.running = False
                         menu_running = False
 

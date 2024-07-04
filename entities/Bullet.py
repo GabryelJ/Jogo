@@ -52,7 +52,7 @@ class Bullet(pygame.sprite.Sprite):
 
         screen.blit(self.image, self.rect.topleft)
         # Desenhe o rect em vermelho para visualização
-        pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)
+        #pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)
 
         # Desenhe a hitbox em azul para visualização
-        pygame.draw.rect(screen, (0, 0, 255), self.hitbox, 2)
+        #pygame.draw.rect(screen, (0, 0, 255), self.hitbox, 2)

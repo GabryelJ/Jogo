@@ -21,8 +21,8 @@ class Game:
     def new_game(self):  # instancia e inicializa grupos e seus componentes
         self.bullet_group = pygame.sprite.Group()
         self.player_group = pygame.sprite.Group()
-        self.player1 = Player(self.bullet_group, 1,)
-        self.player2 = Player(self.bullet_group, 2,)
+        self.player1 = Player(self.bullet_group, 1,100,470)
+        self.player2 = Player(self.bullet_group, 2,600,470)
         self.player_group.add(self.player1)
         self.player_group.add(self.player2)
         self.platform_group = pygame.sprite.Group()

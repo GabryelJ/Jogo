@@ -3,7 +3,7 @@ import time
 from entities.Bullet import Bullet
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, bullet_group, player_id):
+    def __init__(self, bullet_group, player_id,startx,starty):
         pygame.sprite.Sprite.__init__(self)
         self.speed = 4
         self.gravity = 0.5
@@ -14,7 +14,8 @@ class Player(pygame.sprite.Sprite):
         self.jump_delay = 0.2
         self.image = pygame.image.load('entities/sprites/sprite_0.png').convert_alpha()
         self.rect = self.image.get_rect()
-        self.rect.y = 450  # Faz jogadores ser instanciados na altura do chão
+        self.rect.y = starty  # Faz jogadores ser instanciados na altura do chão
+        self.rect.x = startx
         self.current_image = 0
         self.sprite_running_right = [pygame.image.load('entities/sprites/sprite_0.png').convert_alpha(),
                                      pygame.image.load('entities/sprites/sprite_1.png').convert_alpha(),

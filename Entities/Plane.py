@@ -1,9 +1,10 @@
 import pygame
 from entities.AmmoBox import AmmoBox
+from entities.Bomb import Bomb
 
 
 class Plane(pygame.sprite.Sprite):
-    def __init__(self, ammo_group):
+    def __init__(self, ammo_group,bomb_group):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((100, 50))
         self.image.fill((192, 192, 192))
@@ -13,6 +14,7 @@ class Plane(pygame.sprite.Sprite):
         self.rect.y = 100
         self.drop_counter = 0
         self.ammo_group = ammo_group
+        self.bomb_group = bomb_group
 
     def drop(self, drop_counter):
         self.drop_counter = drop_counter
@@ -20,6 +22,9 @@ class Plane(pygame.sprite.Sprite):
             ammo_drop = AmmoBox(self.rect.x, self.rect.y)
             self.drop_counter += 1
             self.ammo_group.add(ammo_drop)
+        if self.drop_counter % 500 == 0:  # Adicione esta condição para dropar bombas
+            bomb_drop = Bomb(self.rect.x, self.rect.y)
+            self.bomb_group.add(bomb_drop)
         self.drop_counter += 1
 
     def patrol(self):

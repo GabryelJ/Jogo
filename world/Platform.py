@@ -1,5 +1,5 @@
 import pygame
-
+#TODO: fragmentar platform para que todo o chão não suma com uma única colisão
 class Platform(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, speedp):
         pygame.sprite.Sprite.__init__(self)

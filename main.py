@@ -6,9 +6,6 @@ from world.Platform import Platform
 
 
 class Game:
-    # TODO: otimizar verificações de impacto
-    # TODO: garantir que verificações de contato e outras interações sejam capturadas na main.
-
     def __init__(self):  # inicializa Game
         pygame.init()
         self.screen = pygame.display.set_mode((constants.WIDTH, constants.HEIGHT))

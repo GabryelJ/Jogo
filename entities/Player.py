@@ -2,8 +2,9 @@ import pygame
 import time
 from entities.Bullet import Bullet
 
+
 class Player(pygame.sprite.Sprite):
-    def __init__(self, bullet_group, player_id,startx,starty):
+    def __init__(self, bullet_group, player_id, startx, starty):
         pygame.sprite.Sprite.__init__(self)
         self.speed = 4
         self.gravity = 0.5
@@ -30,7 +31,7 @@ class Player(pygame.sprite.Sprite):
         self.aimming_up = False
         self.player_id = player_id
         self.health = 100
-        self.ammunition=10
+        self.ammunition = 10
 
         # Defina as dimensões da hitbox
         hitbox_width = 60
@@ -117,7 +118,6 @@ class Player(pygame.sprite.Sprite):
 
         self.hitbox = pygame.Rect(hitbox_x, hitbox_y, hitbox_width, hitbox_height)
 
-
     def apply_gravity(self):
         if not self.on_ground:
             self.vertical_velocity += self.gravity
@@ -125,14 +125,12 @@ class Player(pygame.sprite.Sprite):
             self.vertical_velocity = 0
         self.rect.y += self.vertical_velocity
 
-
     def jump(self):
         current_time = time.time()
         if self.on_ground and (current_time - self.last_jump_time >= self.jump_delay):
             self.vertical_velocity = self.jump_speed
             self.on_ground = False
             self.last_jump_time = current_time
-
 
     def shoot(self):
         if self.walk_direction == "right":
@@ -152,12 +150,10 @@ class Player(pygame.sprite.Sprite):
                 self.ammunition -= 1
             self.bullet_group.add(bullet)
 
-
     def take_damage(self, amount):
         self.health -= amount
         if self.health <= 0:
             self.kill()
-
 
     def draw(self, screen):
 

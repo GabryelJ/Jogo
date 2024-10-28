@@ -1,5 +1,6 @@
 import pygame
 
+
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, speed, walk_direction, damage=10):
         pygame.sprite.Sprite.__init__(self)
@@ -7,21 +8,20 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.image = pygame.transform.scale(self.image, [100, 100])
         if walk_direction == "right":
-            self.rect.center = (x + 60, y - 30)
+            self.rect.center = (x - 3, y - 37)
             self.speed = speed
         elif walk_direction == "left":
-            self.rect.center = (x - 70, y - 30)
+            self.rect.center = (x - 65, y - 37)
             self.speed = speed * (-1)
         else:
             self.rect.center = (x + 35, y)
             self.speed = 500
         self.damage = damage
 
-
         hitbox_width = 20
         hitbox_height = 30
 
-        #Calcule a posição X e Y para centralizar a hitbox
+        # Calcule a posição X e Y para centralizar a hitbox
         hitbox_x = self.rect.x + (self.rect.width - hitbox_width) // 2
         hitbox_y = self.rect.y + (self.rect.height - hitbox_height) // 2
 
@@ -41,7 +41,7 @@ class Bullet(pygame.sprite.Sprite):
         hitbox_width = 20
         hitbox_height = 30
 
-         #Calcule a posição X e Y para centralizar a hitbox
+        #Calcule a posição X e Y para centralizar a hitbox
         hitbox_x = self.rect.x + (self.rect.width - hitbox_width) // 2
         hitbox_y = self.rect.y + (self.rect.height - hitbox_height) // 2
 

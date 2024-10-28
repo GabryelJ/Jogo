@@ -43,7 +43,7 @@ class Game:
         self.platform_group = pygame.sprite.Group()
         self.ammo_group = pygame.sprite.Group()
         self.plane_group = pygame.sprite.Group()
-        self.bomb_group = pygame.sprite.Group()
+        # self.bomb_group = pygame.sprite.Group()
         self.player1 = None
         self.player2 = None
         self.plane = None
@@ -53,7 +53,7 @@ class Game:
         self.player2 = Player(self.bullet_group, 2, 600, 470)
         self.player_group.add(self.player1)
         self.player_group.add(self.player2)
-        self.plane = Plane(self.ammo_group, self.bomb_group)
+        self.plane = Plane(self.ammo_group)
         self.plane_group.add(self.plane)
 
         if self.rodada % 2 == 0:
@@ -83,7 +83,7 @@ class Game:
         self.platform_group.draw(self.screen)
         self.bullet_group.draw(self.screen)
         self.ammo_group.draw(self.screen)
-        self.bomb_group.draw(self.screen)
+        # self.bomb_group.draw(self.screen)
         self.plane_group.draw(self.screen)
         self.draw_hud()
 
@@ -91,7 +91,7 @@ class Game:
         self.player_group.update()
         self.bullet_group.update()
         self.ammo_group.update()
-        self.bomb_group.update()
+        # self.bomb_group.update()
         self.plane_group.update()
         self.platform_group.update()
 
@@ -119,7 +119,7 @@ class Game:
             self.players_collision()
             self.check_ammo_status()
             self.check_bullet_impact()
-            self.check_bomb_impact()
+            # self.check_bomb_impact()  # desativado
 
             if self.player1.health == 0 or self.player2.health == 0:  # game over
                 self.sprite_collect()
@@ -163,7 +163,7 @@ class Game:
                     player.ammunition = 10
                     ammo_box.kill()
 
-    def check_bomb_impact(self):
+    def check_bomb_impact(self):  # desativado
         for bomb in self.bomb_group:
             platform_collisions = pygame.sprite.spritecollide(bomb, self.platform_group, False)
             player_collisions = pygame.sprite.spritecollide(bomb, self.player_group, False)
@@ -184,7 +184,7 @@ class Game:
         self.player_group.empty()
         self.bullet_group.empty()
         self.ammo_group.empty()
-        self.bomb_group.empty()
+        # self.bomb_group.empty()
         self.plane_group.empty()
         self.platform_group.empty()
 

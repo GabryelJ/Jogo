@@ -102,6 +102,7 @@ class Player(pygame.sprite.Sprite):
     def update(self, *args):
         self.player_movement()
         self.apply_gravity()
+        self.rescue()
         self.image = pygame.transform.scale(self.image, [100, 98])
         self.rect = self.image.get_rect(topleft=self.rect.topleft)
 
@@ -154,6 +155,12 @@ class Player(pygame.sprite.Sprite):
         self.health -= amount
         if self.health <= 0:
             self.kill()
+
+    def rescue(self):
+        if self.rect.y > 600:
+            self.rect.y = 300
+            self.rect.x = 300
+
 
     def draw(self, screen):
 

@@ -20,8 +20,8 @@ class Plane(pygame.sprite.Sprite):
         self.drop_counter = drop_counter
         if self.drop_counter % 360 == 0:
             ammo_drop = AmmoBox(self.rect.x, self.rect.y)
-            self.drop_counter += 1
             self.ammo_group.add(ammo_drop)
+        self.drop_counter += 1
         # if self.drop_counter % 500 == 0:  # Adicione esta condição para dropar bombas
             # bomb_drop = Bomb(self.rect.x, self.rect.y)
             # self.bomb_group.add(bomb_drop)

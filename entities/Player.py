@@ -4,7 +4,7 @@ from entities.Bullet import Bullet
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, bullet_group, player_id, startx, starty):
+    def __init__(self, bullet_group, player_id, start_x, start_y):
         pygame.sprite.Sprite.__init__(self)
         self.speed = 4
         self.gravity = 0.5
@@ -15,8 +15,8 @@ class Player(pygame.sprite.Sprite):
         self.jump_delay = 0.2
         self.image = pygame.image.load('entities/sprites/sprite_0.png').convert_alpha()
         self.rect = self.image.get_rect()
-        self.rect.y = starty  # Faz jogadores ser instanciados na altura do chão
-        self.rect.x = startx
+        self.rect.y = start_y
+        self.rect.x = start_x
         self.current_image = 0
         self.sprite_running_right = [pygame.image.load('entities/sprites/sprite_0.png').convert_alpha(),
                                      pygame.image.load('entities/sprites/sprite_1.png').convert_alpha(),
@@ -49,8 +49,8 @@ class Player(pygame.sprite.Sprite):
             self.controls = {
                 "left": pygame.K_a,
                 "right": pygame.K_d,
-                "jump": pygame.K_SPACE,
-                "aim_up": pygame.K_w,
+                "jump": pygame.K_w,
+                "aim_up": pygame.K_f,
                 "shoot": pygame.K_s
             }
         else:
@@ -58,7 +58,7 @@ class Player(pygame.sprite.Sprite):
                 "left": pygame.K_LEFT,
                 "right": pygame.K_RIGHT,
                 "jump": pygame.K_UP,
-                "aim_up": pygame.K_UP,
+                "aim_up": pygame.K_RCTRL,
                 "shoot": pygame.K_DOWN
             }
 

@@ -33,7 +33,7 @@ class Game:
         self.quit_rect = self.quit_text.get_rect(center=(constants.WIDTH / 2, constants.HEIGHT / 2 + 150))
         self.score_text = self.font.render('Score (3)', True, (255, 255, 255))
         self.score_rect = self.score_text.get_rect(center=(constants.WIDTH / 2, constants.HEIGHT / 2 + 250))
-        self.player1_input_rect = pygame.Rect(constants.WIDTH / 2 - 150, constants.HEIGHT / 2 - 150, 300, 50)
+        self.player1_input_rect = pygame.Rect(constants.WIDTH / 2 - 150, constants.HEIGHT / 2 - 200, 300, 50)
         self.player2_input_rect = pygame.Rect(constants.WIDTH / 2 - 150, constants.HEIGHT / 2 - 90, 300, 50)
         self.player1_instruction = self.instruction_font.render('Enter Player 1 Name:', True, (255, 255, 255))
         self.player2_instruction = self.instruction_font.render('Enter Player 2 Name:', True, (255, 255, 255))

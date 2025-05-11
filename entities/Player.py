@@ -1,5 +1,7 @@
 import pygame
 import time
+
+import constants
 from entities.Bullet import Bullet
 
 
@@ -53,7 +55,7 @@ class Player(pygame.sprite.Sprite):
                 "aim_up": pygame.K_f,
                 "shoot": pygame.K_s
             }
-        else:
+        elif player_id == 2:
             self.controls = {
                 "left": pygame.K_LEFT,
                 "right": pygame.K_RIGHT,
@@ -61,6 +63,22 @@ class Player(pygame.sprite.Sprite):
                 "aim_up": pygame.K_RCTRL,
                 "shoot": pygame.K_DOWN
             }
+            self.image.fill(
+                constants.RED + (0,),
+                special_flags=pygame.BLEND_RGB_MULT
+            )
+            for sprite in self.sprite_running_right:
+                sprite.fill(
+                    constants.RED + (0,),
+                    special_flags=pygame.BLEND_RGB_MULT
+                )
+            for sprite in self.sprite_running_left:
+                sprite.fill(
+                    constants.RED + (0,),
+                    special_flags=pygame.BLEND_RGB_MULT
+                )
+
+
 
     def player_movement(self):
         key = pygame.key.get_pressed()
@@ -138,6 +156,7 @@ class Player(pygame.sprite.Sprite):
             self.image = self.sprite_running_right[4]
         else:
             self.image = self.sprite_running_left[4]
+
         self.bullet_counter += 1
         if self.bullet_counter % 10 == 0:
             if self.aimming_up:
